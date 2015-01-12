@@ -27,11 +27,11 @@ typealias Celcius = Int
 
 #### Optional
 ```swift
-var s?:String
+var s: String?
 s = "needle"
 s = nil
 
-let forced:String = s!
+let forced: String = s!
 
 if let forced = s {
   println(forced)
@@ -71,6 +71,9 @@ for c in "string" {
 let concat = "a" + "b"
 let interpolation = "Value is \(str)"
 let compare = (str == "another")
+
+let text = "hello, world"
+let worldSubString = text[advance(text.startIndex, 7)..<advance(text.endIndex, 0)]
 ```
 
 #### Array
@@ -115,6 +118,25 @@ for (key,value) in dict {
 }
 ```
 
+#### Enum
+```swift
+enum direction {
+  case North, South, East, West
+}
+
+enum winnerOrder {
+  case first = 1, second, third, fourth, fifth
+}
+
+switch direction {
+case .North:
+  println("Going North")
+default:
+  println("Going someplace else!")
+}
+
+```
+
 #### Loops
 ```swift
 for i in 1..10 {
@@ -157,9 +179,54 @@ func findDistance(#aPoint: Point, #anotherPoint: Point) -> [Double] {
 }
 ```
 
+#### Functional Programming
+```swift
+
+//Closure
+let animals = ["fish", "cat", "elephant", "dog", "minion"]
+let sortedAnimals = animals.sorted { (first, second) in first > second }
+sortedAnimals = animals.sorted { $0 > $1 } // $0 and $1 mean first and second params respectively
+
+// First class and Higher order function
+func isEven(number: Int) -> Bool {
+  return number % 2 == 0
+}
+
+let evenCheckFunction = isEven
+let odds = Array(1...10).filter(!isEven)
+odds = Array(1...10).filter { (number) in number % 2 != 0 }
+odds = Array(1...10).filter { $0 % 2 == 0 }
+```
+
+#### Protocol
+```swift
+// Protocol Conforming
+class Dog: Walkable, Barkable {
+}
+
+// Protocol Declaration
+protocol Walkable {
+  var legs: Int { get set } // Property requirement
+  func walk() -> String // Method requirement
+}
+
+// any methods in any protocol is required you must use @objc to create an optional protocol requirement like this
+@objc protocol Barkable {
+  // class or struct that conform this protocol can implement this method or not
+  optional func bark() -> String 
+}
+```
+
 #### Comments
 ```swift
 //Single Line
 /* Multiple line
    comment */
+```
+
+#### Code Organizer
+```swift
+# MARK: UITableView DataSource and Delegate
+# TODO: I will do it later, I promise.
+# FIXME: Could anyone refactor this ?
 ```
